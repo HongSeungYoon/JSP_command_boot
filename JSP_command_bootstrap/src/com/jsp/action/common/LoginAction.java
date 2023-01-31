@@ -33,7 +33,7 @@ public class LoginAction implements Action {
 			if(member!=null) { //아이디 존재
 				if(pwd.equals(member.getPwd())) { // 로그인성공.
 					session.setAttribute("loginUser", member);
-					//session.setMaxInactiveInterval(6*60);
+					session.setMaxInactiveInterval(30*60);
 					url = retUrl !=null ? "redirect:"+retUrl : url;
 				}else {// 패스워드 불일치
 					errorMsg = "패스워드가 일치하지 않습니다.";						
