@@ -13,6 +13,7 @@
     		<i class="fa fa-clock"></i>{{prettifyDate regdate}}
 	 		<a class="btn btn-primary btn-xs {{rno}}-a" id="modifyReplyBtn" data-rno={{rno}}
 				onclick="replyModifyModal_go('{{rno}}');"
+				style="display:{{visibleByLoginCheck replyer}};"
 	    		data-replyer={{replyer}} data-toggle="modal" data-target="#modifyModal">Modify</a>
   		</span>
 	
@@ -45,6 +46,7 @@ function printData(replyArr,target,templateObject){
 	target.after(html);
 }
 
+/*함수를 내장시켜줌  */
 Handlebars.registerHelper({
 	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
 						var dateObj=new Date(timeValue);
@@ -52,8 +54,22 @@ Handlebars.registerHelper({
 						var month=dateObj.getMonth()+1;
 						var date=dateObj.getDate();
 						return year+"/"+month+"/"+date;
-					}
+					},
+	"visibleByLoginCheck":function(replyer){ 
+		var result="none";
+		if(replyer == "${loginUser.id}") result="visible";
+		return result;
+	}
 });
+</script>
+<script>
+function replyRegist_go(){
+	var replytext1=$('#newReplyText1').val();
+	alert(replytext1);
+	
+	var replytext2=$('#newReplyText2').text();
+	alert(replytext2);
+}
 </script>
 
 
