@@ -65,7 +65,7 @@ Handlebars.registerHelper({
 <script>
 function replyRegist_go(){
 	var replytext=$('#newReplyText').val();
-	
+	/
 	var data={
 			"bno":"${board.bno}",
 			"replyer":"${loginUser.id}",
