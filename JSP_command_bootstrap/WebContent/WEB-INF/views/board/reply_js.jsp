@@ -26,27 +26,25 @@
 </script>
 
 
+
+
 <script>
 var replyPage=1;
 window.onload=function(){
 	getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
 }
-
 function getPage(pageInfo,page){
 	if(page) replyPage = page;
 	$.getJSON(pageInfo,function(data){	
 		printData(data.replyList,$('#repliesDiv'),$('#reply-list-template'));		
 	});
 }
-
 function printData(replyArr,target,templateObject){
 	var template=Handlebars.compile(templateObject.html());
 	var html = template(replyArr);	
 	$('.replyLi').remove();
 	target.after(html);
 }
-
-/*함수를 내장시켜줌  */
 Handlebars.registerHelper({
 	"prettifyDate":function(timeValue){ //Handlbars에 날짜출력함수 등록
 						var dateObj=new Date(timeValue);
@@ -55,44 +53,39 @@ Handlebars.registerHelper({
 						var date=dateObj.getDate();
 						return year+"/"+month+"/"+date;
 					},
-	"visibleByLoginCheck":function(replyer){ 
-		var result="none";
-		if(replyer == "${loginUser.id}") result="visible";
-		return result;
+	"visibleByLoginCheck":function(replyer){
+		var result="none";		
+		if(replyer == "${loginUser.id}") result="visible";		
+		return result;						  
 	}
 });
 </script>
+
 <script>
 function replyRegist_go(){
-	var replytext=$('#newReplyText').val();
-	/
+	//alert("add reply click");
+	var replytext=$('#newReplyText').val();	
+	
 	var data={
 			"bno":"${board.bno}",
 			"replyer":"${loginUser.id}",
-			"replytext":replytext
+			"replytext":replytext	
 	}
-	$.ajax({
-	  url:"<%=request.getContextPath()%>/reply/regist.do",
-	  type:"post",
-	  data:JSON.stringify(data),
-	  contentType:'application/json',
-	  success:function(data){
-		  
-	  },
-	  error:function(error){
-		  AjaxErrorSecurityRedirectHandler(error.status);
-	  }
-		
-	});
 	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/regist.do",
+		type:"post",
+		data:JSON.stringify(data),		
+		contentType:'application/json',
+		success:function(data){
+			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
+			replyPage=data; //페이지이동
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+${board.bno}+"&page="+data); //리스트 출력
+			$('#newReplyText').val("");	
+		},
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);	
+		}
+	});
 }
 </script>
-
-
-
-
-
-
-
-
-
