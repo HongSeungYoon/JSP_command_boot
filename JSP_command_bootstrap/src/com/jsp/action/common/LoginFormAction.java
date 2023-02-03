@@ -14,7 +14,7 @@ public class LoginFormAction implements Action{
 		String error=request.getParameter("error");
 		if(error!=null && error.equals("-1")) {
 			response.setStatus(302);
-		}
+		}//setStatus 상태를 조작함
 		
 		String retUrl = request.getParameter("retUrl");
 		

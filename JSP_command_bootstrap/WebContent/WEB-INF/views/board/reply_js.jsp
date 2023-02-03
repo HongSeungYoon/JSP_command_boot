@@ -64,11 +64,27 @@ Handlebars.registerHelper({
 </script>
 <script>
 function replyRegist_go(){
-	var replytext1=$('#newReplyText1').val();
-	alert(replytext1);
+	var replytext=$('#newReplyText').val();
 	
-	var replytext2=$('#newReplyText2').text();
-	alert(replytext2);
+	var data={
+			"bno":"${board.bno}",
+			"replyer":"${loginUser.id}",
+			"replytext":replytext
+	}
+	$.ajax({
+	  url:"<%=request.getContextPath()%>/reply/regist.do",
+	  type:"post",
+	  data:JSON.stringify(data),
+	  contentType:'application/json',
+	  success:function(data){
+		  
+	  },
+	  error:function(error){
+		  AjaxErrorSecurityRedirectHandler(error.status);
+	  }
+		
+	});
+	
 }
 </script>
 
