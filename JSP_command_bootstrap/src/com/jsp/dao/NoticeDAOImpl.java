@@ -10,12 +10,12 @@ import org.apache.ibatis.session.SqlSession;
 import com.jsp.command.SearchCriteria;
 import com.jsp.dto.NoticeVO;
 
-public class NoticeDAOImpl implements NoticeDAO {
+public class NoticeDAOImpl implements NoticeDAO{
 	@Override
 	public List<NoticeVO> selectSearchNoticeList(SqlSession session, SearchCriteria cri) throws SQLException {
 
 		int startRow = cri.getStartRowNum();
-		int endRow = startRow + cri.getPerPageNum() - 1;
+		int endRow = startRow+cri.getPerPageNum()-1;
 
 		Map<String, Object> dataParam = new HashMap<String, Object>();
 		dataParam.put("startRow", startRow);
@@ -23,7 +23,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 		dataParam.put("searchType", cri.getSearchType());
 		dataParam.put("keyword", cri.getKeyword());
 
-		List<NoticeVO> noticeList = session.selectList("Notice-Mapper.selectSearchNoticeList", dataParam);
+		List<NoticeVO> noticeList 
+			= session.selectList("Notice-Mapper.selectSearchNoticeList", dataParam);
 
 		return noticeList;
 	}

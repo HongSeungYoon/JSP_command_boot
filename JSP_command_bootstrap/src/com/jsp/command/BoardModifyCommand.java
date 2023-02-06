@@ -1,7 +1,6 @@
 package com.jsp.command;
 
 import com.jsp.dto.BoardVO;
-import com.jsp.dto.NoticeVO;
 
 public class BoardModifyCommand {
 	
@@ -35,18 +34,17 @@ public class BoardModifyCommand {
 		this.writer = writer;
 	}
 	
-	public BoardVO toBoardVO() {
-		BoardVO board = new BoardVO();
+	public BoardVO toBoardVO(){
+		BoardVO notice = new BoardVO();
 		
-		board.setBno(Integer.parseInt(this.bno));
-		board.setTitle(this.title);
-		board.setContent(this.content);
-		board.setWriter(this.writer);
+		notice.setBno(Integer.parseInt(this.bno));
+		notice.setTitle(this.title);
+		notice.setContent(this.content);
+		notice.setWriter(this.writer);	
 		
-		return board;
+		return notice;
 		
 	}
-	
 }
 
 

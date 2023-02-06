@@ -3,14 +3,13 @@ package com.jsp.dto;
 import java.util.Date;
 
 public class ReplyVO {
-   //비동기
-	private int rno;  //고유번호
-	private int bno;
-	private String replytext;
-	private String replyer;
-	private Date regdate;
-	private Date updatedate;
 	
+	private int rno; 			//고유번호
+	private int bno;			//게시글번호
+	private String replytext;	//댓글내용
+	private String replyer;		//작성자
+	private Date regdate;		//등록일
+	private Date updatedate;	//수정일
 	
 	public int getRno() {
 		return rno;
@@ -48,6 +47,5 @@ public class ReplyVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
-	
-	
+		
 }
